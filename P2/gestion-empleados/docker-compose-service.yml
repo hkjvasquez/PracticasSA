@@ -1,0 +1,26 @@
+version: '3.8'
+services:
+
+  app:
+    build: .
+    container_name: node_app
+    restart: always
+    ports:
+      - "3000:3000"  # Exponemos el puerto 3000 del contenedor al host
+    depends_on:
+      - db  # Asegura que el contenedor de la base de datos se inicie antes que la aplicación
+    environment:
+      DB_HOST: db  # Nombre del servicio de base de datos en docker-compose
+      DB_PORT: 3306
+      DB_USER: admin
+      DB_PASSWORD: 1234
+      DB_NAME: empleado
+    networks:
+      - app-network  # Asignar el contenedor a la red personalizada
+
+volumes:
+  mysql_data:
+
+networks:
+  app-network:
+    driver: bridge  # Puedes usar el driver de red predeterminado

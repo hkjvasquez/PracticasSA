@@ -1,0 +1,27 @@
+version: '3.9'
+
+services:
+  db:
+    image: mysql:5.7 #mysql:8.0
+    container_name: db-mysql
+    networks:
+      - app-network
+    restart: always
+    env_file: 
+      mysql.env
+    ports:
+      - '3306:3306'
+    expose:
+      - '3306'
+    volumes:
+      - mysql-data:/var/lib/mysql
+      - /c/docker/shared:/usr/shared
+
+volumes:
+  mysql-data:
+    driver: local
+
+networks:
+  app-network:
+    driver: bridge
+    #external: true  # Indica que esta red ya existe y es externa
