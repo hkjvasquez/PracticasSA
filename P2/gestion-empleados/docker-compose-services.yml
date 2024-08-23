@@ -51,6 +51,21 @@ services:
     networks:
       - red_servicios  # Asignar el contenedor a la red personalizada
 
+  gestion_empleados:
+    build:
+      context: ./gestion-empleados
+      dockerfile: Dockerfile
+    container_name: gestion-empleados
+    restart: always
+    ports:
+      - "3004:3004"  # Exponemos el puerto 3000 del contenedor al host
+    depends_on:
+      - db
+    env_file:
+      - mysql.env  # Referencia al archivo mysql.env para las credenciales
+    networks:
+      - red_servicios  # Asignar el contenedor a la red personalizada
+
             
 volumes:
   mysql_data:
