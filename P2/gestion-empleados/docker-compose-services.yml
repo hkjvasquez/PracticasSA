@@ -1,0 +1,45 @@
+version: '3.8'
+services:
+  consulta_empleado:
+    build:
+      context: ./consulta-empleado
+      dockerfile: Dockerfile
+    container_name: consulta-empleado
+    restart: always
+    ports:
+      - "3001:3001"  # Exponemos el puerto 3000 del contenedor al host
+    depends_on:
+      - db  # Asegura que el contenedor de la base de datos se inicie antes que la aplicación
+    #environment:
+     # DB_HOST: db  # Nombre del servicio de base de datos en docker-compose
+      #DB_PORT: 3306
+      #DB_USER: admin
+      #DB_PASSWORD: 1234
+      #DB_NAME: empleado
+    env_file:
+      - mysql.env  # Referencia al archivo mysql.env para las credenciales
+    networks:
+      - red_servicios  # Asignar el contenedor a la red personalizada
+    
+  insert-empleado:
+    build:
+      context: ./insert-empleado
+      dockerfile: Dockerfile
+    container_name: insert-empleado
+    restart: always
+    ports:
+      - "3002:3002"  # Exponemos el puerto 3000 del contenedor al host
+    depends_on:
+      - db
+    env_file:
+      - mysql.env  # Referencia al archivo mysql.env para las credenciales
+    networks:
+      - red_servicios  # Asignar el contenedor a la red personalizada
+
+
+volumes:
+  mysql_data:
+
+networks:
+  red_servicios:
+    driver: bridge  # Puedes usar el driver de red predeterminado
