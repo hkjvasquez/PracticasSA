@@ -2,7 +2,7 @@ const connection = require('../config/db');
 
 // Obtener todos los empleados
 const obtenerEmpleados = async () => {
-  const [rows] = await connection.query('SELECT * FROM empleados');
+  const [rows] = await connection.query('SELECT empleados.id,empleados.nombre,empleados.puesto,empleados.salario,empleados.fecha_contratacion,roles.nombre_rol AS rol FROM empleados JOIN roles ON empleados.rol_id = roles.id;');
   return rows;
 };
 

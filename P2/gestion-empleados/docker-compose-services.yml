@@ -1,10 +1,10 @@
 version: '3.8'
 services:
-  consulta_empleado:
+  seguimiento-rendimiento:
     build:
-      context: ./consulta-empleado
+      context: ./seguimiento-rendimiento
       dockerfile: Dockerfile
-    container_name: consulta-empleado
+    container_name: seguimiento-rendimiento
     restart: always
     ports:
       - "3001:3001"  # Exponemos el puerto 3000 del contenedor al host
@@ -15,11 +15,11 @@ services:
     networks:
       - red_servicios  # Asignar el contenedor a la red personalizada
     
-  insert-empleado:
+  roles-permisos:
     build:
-      context: ./insert-empleado
+      context: ./roles-permisos
       dockerfile: Dockerfile
-    container_name: insert-empleado
+    container_name: roles-permisos
     restart: always
     ports:
       - "3002:3002"  # Exponemos el puerto 3000 del contenedor al host
@@ -30,11 +30,11 @@ services:
     networks:
       - red_servicios  # Asignar el contenedor a la red personalizada
 
-  update-empleado:
+  administracion-nomina:
     build:
-      context: ./update-empleado
+      context: ./administracion-nomina
       dockerfile: Dockerfile
-    container_name: update-empleado
+    container_name: administracion-nomina
     restart: always
     ports:
       - "3003:3003"  # Exponemos el puerto 3000 del contenedor al host
@@ -60,6 +60,20 @@ services:
     networks:
       - red_servicios  # Asignar el contenedor a la red personalizada
 
+  analisis-reportes:
+    build:
+      context: ./analisis-reportes
+      dockerfile: Dockerfile
+    container_name: analisis-reportes
+    restart: always
+    ports:
+      - "3005:3005"  # Exponemos el puerto 3000 del contenedor al host
+    depends_on:
+      - db
+    env_file:
+      - mysql.env  # Referencia al archivo mysql.env para las credenciales
+    networks:
+      - red_servicios  # Asignar el contenedor a la red personalizada
             
 volumes:
   mysql_data:

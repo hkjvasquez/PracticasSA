@@ -1,0 +1,38 @@
+Contrato de API
+
+1. Creación de Rol
+Método: POST
+URL: http://localhost:3002/api/creacion-rol
+Descripción: Crea un nuevo rol en el sistema.
+Cuerpo de la Solicitud:
+json
+{
+    "nombre": "Nuevo Rol"
+}
+
+
+2. Consulta de Rendimiento
+Método: GET
+URL: http://localhost:3001/api/consulta-rendimiento
+Descripción: Consulta las evaluaciones de rendimiento de los empleados.
+
+3. Consulta de Empleado
+Método: GET
+URL: http://localhost:3004/api/consulta-empleado
+Descripción: Consulta la información detallada de un empleado.
+
+4. Actualización de Fecha de Pago
+Método: PUT
+URL: http://localhost:3003/api/actuliza-fpago/1
+Descripción: Actualiza la fecha de pago de un empleado.
+Cuerpo de la Solicitud:
+json
+
+{
+    "fecha_pago": "2024-08-25"
+}
+
+5. Eliminación de Reporte
+Método: DELETE
+URL: http://localhost:3005/api/delete-reporte/4
+Descripción: Elimina un reporte específico del sistema.

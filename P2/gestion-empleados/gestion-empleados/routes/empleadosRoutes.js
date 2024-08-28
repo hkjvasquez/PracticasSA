@@ -8,7 +8,7 @@ const {
   eliminarEmpleadoController
 } = require('../controllers/empleadosController');
 
-router.get('/', obtenerEmpleadosController);
+router.get('/consulta-empleado', obtenerEmpleadosController);
 router.get('/:id', obtenerEmpleadoPorIdController);
 router.post('/', insertarEmpleadoController);
 router.put('/:id', actualizarEmpleadoController);
